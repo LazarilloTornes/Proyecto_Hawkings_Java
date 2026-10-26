@@ -14,7 +14,7 @@ public class PROYECTO_HAWKINS {
     public static void main(String[] args) {
         Scanner scr = new Scanner(System.in);
         final float MAX_ENERGIA = 200.0f;
-        final float LIMITE_RIESGO = 150.0f;
+        final double LIMITE_RIESGO = 150.0;
         String operadorActual = "";
         double sensorMedido = 0;
         int codigoRiesgo = 0;
@@ -25,7 +25,7 @@ public class PROYECTO_HAWKINS {
         operadorActual = scr.nextLine();
         //scr.nextLine();
         System.out.println("Bienvenido " + operadorActual);
-        menu(scr,opcionMenu);
+        menu();
         System.out.print("Introduzca la opción deseada: ");
         opcionMenu = scr.nextInt();
         while(opcionMenu != 0){
@@ -45,22 +45,22 @@ public class PROYECTO_HAWKINS {
                     System.out.println("---------------------------");
                     break;
                 case 2:
+                    simularMuestreoContinuo(scr,LIMITE_RIESGO);
                     break;
                 case 0:
                     break;
                 default:
                     break;
             }
-            menu(scr,opcionMenu);
+            menu();
             System.out.print("Introduzca la opción deseada: ");
             opcionMenu = scr.nextInt();
         }
     }
-    public static void menu(Scanner scr, int opcionMenu)
+    public static void menu()
 {
     System.out.print("--PROYECTO--HAWKINGS--\n------------------------\n1. Inspeccionar Sensor Individual\n------------------------\n2. Iniciar Muestreo Continuo\n------------------------\n0. Salir de la consola\n-------------------------------\n");
     //puesto en un mismo print por petición del ejercicio
-    
 }
 
 
@@ -123,5 +123,27 @@ public static boolean ejecutarProtocoloAccion(int nv){
             return false;
     }
 }
-
+public static void simularMuestreoContinuo (Scanner scr,double limit){
+    double lecture = leerLecturaSegura(scr, "Introduce lectura µT:");
+    double media = 0;
+    int intentos=0;
+    while(lecture>0){
+        lecture = leerLecturaSegura(scr, "Introduce lectura µT:");
+        if (lecture<0){
+        break;
+        }
+        if (lecture == 0){
+            continue;
+        }
+        if (lecture > 150.0){
+            System.out.println("CUIDADO!!! ha superado el límite recomendado");
+        }
+        media +=lecture;
+        intentos += 1;
+    }
+    System.out.print("\nNúmero de muestreos: " + intentos + "\n Media del muestro: " + (media/intentos));
+   
+}
+    
+        
 }
