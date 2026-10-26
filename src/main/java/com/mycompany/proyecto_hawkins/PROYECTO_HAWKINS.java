@@ -141,7 +141,8 @@ public static void simularMuestreoContinuo (Scanner scr,double limit){
         media +=lecture;
         intentos += 1;
     }
-    System.out.print("\nNúmero de muestreos: " + intentos + "\n Media del muestro: " + (media/intentos));
+    System.out.print("\nNúmero de muestreos: " + intentos + "\nMedia del muestro: ");
+    System.out.printf("%.2f%n", (media/intentos));
    
 }
     
