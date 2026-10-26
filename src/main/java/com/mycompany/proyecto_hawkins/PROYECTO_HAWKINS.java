@@ -68,12 +68,18 @@ public class PROYECTO_HAWKINS {
 //Sí, efectivamente, es una comprobación que devuelve aquello introducido por el scanner
 public static Double leerLecturaSegura(Scanner scr, String msg){
     double lcr = 0;
-    try{
+    boolean valid = false;
+    while(!valid){
+        try{
         System.out.print(msg);
         lcr = scr.nextDouble();
-    } catch (InputMismatchException e){
-        System.out.println("Error: Unidad no válida, por favor introduzca un número");
+        valid = true;
+    } catch (Exception e){
+        System.out.println("Introduzca un valor válido");
+        scr.next();
     }
+    }
+
     return lcr;
 }
 
