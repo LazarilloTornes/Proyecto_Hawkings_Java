@@ -35,7 +35,7 @@ public class PROYECTO_HAWKINS {
                     //sensor medido tendrá el valor que se introduzca
                     sensorMedido = leerLecturaSegura(scr, "Introduce lectura µT: ");
                     //con ese valor de sensor medido se evalua el riesgo y se almacena en codigoRiesgo
-                    codigoRiesgo = evaluarNivelRiesgo(sensorMedido);
+                    codigoRiesgo = evaluarNivelRiesgo(sensorMedido,LIMITE_RIESGO);
                     //porcentaje               
                     porcentajeEstado = calcularPorcentajeTruncado(sensorMedido, MAX_ENERGIA);
                     //Creo que esto es básicamente para saber si el portal esta abierto
@@ -87,7 +87,7 @@ public static Double leerLecturaSegura(Scanner scr, String msg){
 
 
 //que hará este proceso?
-public static int evaluarNivelRiesgo(double microteslas){
+public static int evaluarNivelRiesgo(double microteslas, double lmt_rg){
     //Lo del texto con ternario es un poco ida de olla, pero bueno
     String riesgo = microteslas <= 50.0 ? "Seguro":
                     microteslas > 150.0 ? "Crítico":
@@ -102,7 +102,7 @@ public static int evaluarNivelRiesgo(double microteslas){
     else if(microteslas > 50.0 && microteslas<150.0){
         nv_riesgo =1;
     }
-    else if(microteslas > 150.0){
+    else if(microteslas > lmt_rg){
         nv_riesgo = 2;
     }
     return nv_riesgo;
